@@ -45,3 +45,26 @@ for(i in 1:length(unique(ExperimentalCellType))){
 
 
 #Note that any references to the cell type specific gene lists originally derived from Darmanis are self-referential.
+
+
+str(ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap_MeanTag)
+table(ExperimentalCellType)
+
+CorrelationCoefficients_CellTypeIndexVsCellType<-matrix(0, 38, 6)
+colnames(CorrelationCoefficients_CellTypeIndexVsCellType)<-names(table(ExperimentalCellType[which(ExperimentalCellType%in%c("fetal_quiescent","fetal_replicating","hybrid")==F)]))
+row.names(CorrelationCoefficients_CellTypeIndexVsCellType)<-row.names(ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap_MeanTag)
+
+ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap_MeanTag_noFetal<-ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap_MeanTag[,which(ExperimentalCellType%in%c("fetal_quiescent","fetal_replicating","hybrid")==F)]
+str(ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap_MeanTag_noFetal)
+
+ExperimentalCellType_NoFetal<-ExperimentalCellType[which(ExperimentalCellType%in%c("fetal_quiescent","fetal_replicating","hybrid")==F)]
+str(ExperimentalCellType_NoFetal)
+
+for(i in c(1:38)){
+  for(j in c(1:6)){
+    temp<-summary.lm(lm(ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap_MeanTag_noFetal[i,]~(ExperimentalCellType_NoFetal==names(table(ExperimentalCellType_NoFetal))[j])))
+    CorrelationCoefficients_CellTypeIndexVsCellType[i,j]<-temp$r.squared
+  }
+}
+
+write.csv(CorrelationCoefficients_CellTypeIndexVsCellType, "CorrelationCoefficients_CellTypeIndexVsCellType.csv")
