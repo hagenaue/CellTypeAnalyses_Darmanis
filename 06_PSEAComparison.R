@@ -212,6 +212,10 @@ png("PSEA_AstrocyteVsCellType_noSD0_NoDarmanis.png", width=1000, height=400)
 boxplot(astrocyte_reference~ExperimentalCellType, ylab="Astrocyte Reference Signal", col="lavender")
 dev.off()
 
+pdf("PSEA_AstrocyteVsCellType_noSD0_NoDarmanis.pdf", width=9, height=4) 
+boxplot(astrocyte_reference[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F]~ExperimentalCellType[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F], ylab="Astrocyte Reference Signal", col="lavender")
+dev.off()
+
 summary.lm(lm(astrocyte_reference~ExperimentalCellType))
 
 # Coefficients:
@@ -245,6 +249,10 @@ AstrocyteIndex_NoDarmanis_NoTagAvg<-apply(ZscoreDarmanis_Expression_CellType_NoP
 
 png("Us_AstrocyteVsCellType_noSD0_NoDarmanis_noTagAvg.png", width=1000, height=400) 
 boxplot(AstrocyteIndex_NoDarmanis_NoTagAvg~ExperimentalCellType, ylab="Astrocyte Index", col="lavender")
+dev.off()
+
+pdf("Us_AstrocyteVsCellType_noSD0_NoDarmanis_noTagAvg.pdf", width=9, height=4) 
+boxplot(AstrocyteIndex_NoDarmanis_NoTagAvg[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F]~ExperimentalCellType[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F], ylab="Astrocyte Index", col="lavender")
 dev.off()
 
 summary.lm(lm(AstrocyteIndex_NoDarmanis_NoTagAvg~ExperimentalCellType))
@@ -300,6 +308,11 @@ for(i in 1:ncol(ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap_MeanTag_NoDa
 png("Us_AstrocyteVsCellType_noSD0_NoDarmanis_TagAvg.png", width=1000, height=400) 
 boxplot(CellTypeIndices_NoDarmanis[1,]~ExperimentalCellType, ylab="Astrocyte Index", col="lavender")
 dev.off()
+
+pdf("Us_AstrocyteVsCellType_noSD0_NoDarmanis_TagAvg.pdf", width=9, height=4) 
+boxplot(CellTypeIndices_NoDarmanis[1,ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F]~ExperimentalCellType[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F], ylab="Astrocyte Index", col="lavender")
+dev.off()
+
 
 summary.lm(lm(CellTypeIndices_NoDarmanis[1,]~ExperimentalCellType))
 # Coefficients:
@@ -453,6 +466,10 @@ summary.lm(lm(Neuron_All_reference~ExperimentalCellType))
 # Multiple R-squared:  0.3339,	Adjusted R-squared:  0.3222 
 # F-statistic: 28.63 on 8 and 457 DF,  p-value: < 2.2e-16
 
+pdf("PSEA_Neuron_AllVsCellType_noSD0_NoDarmanis.pdf", width=9, height=4) 
+boxplot(Neuron_All_reference[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F]~ExperimentalCellType[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F], ylab="Neuron_All Reference Signal", col="darkviolet")
+dev.off()
+
 
 #Making a version of our analysis that resembles theirs:
 Neuron_AllIndex_NoDarmanis_NoTagAvg<-apply(ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap[ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap[,14]=="Neuron_All"& ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap[,12]!="Darmanis_PNAS_2015",c(15:ncol(ZscoreDarmanis_Expression_CellType_NoPrimaryOverlap))], 2, mean)
@@ -460,6 +477,11 @@ Neuron_AllIndex_NoDarmanis_NoTagAvg<-apply(ZscoreDarmanis_Expression_CellType_No
 png("Us_Neuron_AllVsCellType_noSD0_NoDarmanis_noTagAvg.png", width=1000, height=400) 
 boxplot(Neuron_AllIndex_NoDarmanis_NoTagAvg~ExperimentalCellType, ylab="Neuron_All Index", col="darkviolet")
 dev.off()
+
+pdf("Us_Neuron_AllVsCellType_noSD0_NoDarmanis_noTagAvg.pdf", width=9, height=4) 
+boxplot(Neuron_AllIndex_NoDarmanis_NoTagAvg[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F]~ExperimentalCellType[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F], ylab="Neuron_All Index", col="darkviolet")
+dev.off()
+
 
 summary.lm(lm(Neuron_AllIndex_NoDarmanis_NoTagAvg~ExperimentalCellType))
 
@@ -470,6 +492,10 @@ summary.lm(lm(Neuron_AllIndex_NoDarmanis_NoTagAvg~ExperimentalCellType))
 
 png("Us_Neuron_AllVsCellType_noSD0_NoDarmanis_TagAvg.png", width=1000, height=400) 
 boxplot(CellTypeIndices_NoDarmanis[5,]~ExperimentalCellType, ylab="Neuron_All Index", col="darkviolet")
+dev.off()
+
+pdf("Us_Neuron_AllVsCellType_noSD0_NoDarmanis_TagAvg.pdf", width=9, height=4) 
+boxplot(CellTypeIndices_NoDarmanis[5,ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F]~ExperimentalCellType[ExperimentalCellType%in%c("fetal_quiescent", "fetal_replicating", "hybrid")==F], ylab="Neuron_All Index", col="darkviolet")
 dev.off()
 
 summary.lm(lm(CellTypeIndices_NoDarmanis[5,]~ExperimentalCellType))
